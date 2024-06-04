@@ -1,0 +1,49 @@
+.input::placeholder {
+  width: 40px;
+  height: 17px;
+  top: 67px;
+  left: 566px;
+  gap: 0px;
+  opacity: 0.8px;
+  font-family: FiraGO;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  text-align: left;
+}
+
+@media screen and (max-width: 1020px) {
+  .orange-box,
+  .navigation-search,
+  .cart-container,
+  .profile-container {
+    display: none !important;
+  }
+  .gray-box {
+    height: 50px !important;
+  }
+  .hamburger-menu {
+    display: block !important;
+    cursor: pointer;
+  }
+  .search-content {
+    padding: 0px 20px !important;
+    height: 40px !important;
+  }
+  .logo {
+    width: 107px !important;
+    height: 28px !important;
+    position: absolute;
+    left: 56px;
+  }
+  .cart-profile {
+    width: 67px !important;
+  }
+  .search-mobile,
+  .cart-mobile {
+    display: block !important;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}

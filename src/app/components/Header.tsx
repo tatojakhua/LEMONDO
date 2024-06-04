@@ -5,7 +5,7 @@ import SearchContainer from './SearchContainer';
 
 const Header: React.FC = () => {
   return (
-    <header style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+    <header style={{ display: 'flex', flexDirection: 'column' }}>
       <OrangeContainer />
       <SearchContainer />
     </header>
