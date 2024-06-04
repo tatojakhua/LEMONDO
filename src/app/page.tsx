@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <main className="app">
       <Header />
-      <h1>App</h1>
     </main>
   );
 }
