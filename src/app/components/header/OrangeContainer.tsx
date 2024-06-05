@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import phone from '../assets/phone.png';
+import phone from '../../assets/phone.png';
 import './header.css';
 
 const OrangeContainer: React.FC = () => {
