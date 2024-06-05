@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
-import logo from '../assets/logo.png';
-import dots from '../assets/buttonDots.png';
-import search from '../assets/search.png';
-import cart from '../assets/cart.png';
-import profile from '../assets/profile.png';
-import menu from '../assets/hamburger-menu.png';
-import searchMobile from '../assets/search-mobile.png';
+import logo from '../../assets/logo.png';
+import dots from '../../assets/buttonDots.png';
+import search from '../../assets/search.png';
+import cart from '../../assets/cart.png';
+import profile from '../../assets/profile.png';
+import menu from '../../assets/hamburger-menu.png';
+import searchMobile from '../../assets/search-mobile.png';
 import './header.css';
 
 const SearchContainer = () => {
@@ -26,7 +26,6 @@ const SearchContainer = () => {
           alignItems: 'end',
           justifyContent: 'space-between',
           flexDirection: 'row',
-          // width: '100%',
           maxWidth: '1200px',
           margin: '0px auto',
           padding: '0px 15px',
@@ -111,7 +110,7 @@ const SearchContainer = () => {
             <input
               className="input"
               placeholder="ძიება"
-              style={{ border: 'none', width: '390px' }}
+              style={{ border: 'none', width: '390px', outline: 'none' }}
             />
           </div>
         </div>
