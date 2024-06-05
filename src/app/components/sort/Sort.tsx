@@ -15,14 +15,28 @@ const StyleSection = styled.section`
   margin: 0px auto;
   padding: 0px 15px;
   height: 92px;
+
+  @media screen and (max-width: 1020px) {
+    height: 59px;
+  }
+`;
+
+const MobileOnlySection = styled(StyleSection)`
+  @media screen and (min-width: 1020px) {
+    display: none;
+  }
 `;
 
 const Sort: React.FC = () => {
   return (
-    <StyleSection>
-      <MainLayout />
-      <MobileLayOut />
-    </StyleSection>
+    <>
+      <StyleSection>
+        <MainLayout />
+      </StyleSection>
+      <MobileOnlySection>
+        <MobileLayOut />
+      </MobileOnlySection>
+    </>
   );
 };
 

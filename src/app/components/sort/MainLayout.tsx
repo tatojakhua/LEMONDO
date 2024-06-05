@@ -8,7 +8,7 @@ import grid2 from '../../assets/grid2.png';
 import down from '../../assets/selectDown.png';
 import { optionArray } from '@/constants';
 
-const StyleInnerContainer = styled.div<{ width: string; end?: boolean }>`
+const StyleInnerContainer = styled.div<{ width: string; end?: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,19 +35,22 @@ const StyleH2Text = styled.h2`
   color: rgba(0, 0, 0, 1);
 `;
 
-const StyleSelectMenu = styled.div`
+export const StyleSelectMenu = styled.div<{ showitem?: string }>`
   width: 157px;
   height: 32px;
   border-radius: 30px;
   background-color: rgba(242, 242, 242, 1);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
   cursor: pointer;
   @media screen and (max-width: 1020px) {
-    display: none;
+    display: ${(props) => (props.showitem ? 'block' : 'none')};
   }
 `;
 
-const StyleSelectBTN = styled.div`
+export const StyleSelectBTN = styled.div`
   display: flex;
   text-align: center;
   align-items: end;
@@ -55,7 +58,7 @@ const StyleSelectBTN = styled.div`
   margin-top: 7px;
 `;
 
-const StyleSelectBTNTEXT = styled.span`
+export const StyleSelectBTNTEXT = styled.span`
   width: 62px;
   height: 14px;
   font-family: FiraGo;
@@ -63,8 +66,8 @@ const StyleSelectBTNTEXT = styled.span`
   line-height: 14.4px;
 `;
 
-const StyleUlOptions = styled.ul<{ showdisplay: boolean }>`
-  display: ${(props) => (props.showdisplay ? 'block' : 'none')};
+export const StyleUlOptions = styled.ul<{ showdisplay: string }>`
+  display: ${(props) => (props.showdisplay == 'true' ? 'block' : 'none')};
   position: relative;
   width: 200px;
   height: 222px;
@@ -75,7 +78,7 @@ const StyleUlOptions = styled.ul<{ showdisplay: boolean }>`
   z-index: 10;
 `;
 
-const StyledOptionSpan = styled.li`
+export const StyledOptionSpan = styled.li`
   display: flex;
   width: 160px;
   height: 22px;
@@ -90,9 +93,9 @@ const StyledOptionSpan = styled.li`
   }
 `;
 
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
   position: absolute;
-  width: 100%;
+  width: calc(100% - 30px);
   height: 2px;
   background: rgba(242, 242, 242, 1);
   bottom: 0;
@@ -123,7 +126,7 @@ const MainLayout = () => {
         />
         <StyleH2Text>Apple</StyleH2Text>
       </StyleInnerContainer>
-      <StyleInnerContainer width="250px" end={true}>
+      <StyleInnerContainer width="250px" end="true">
         <StyleSelectMenu
           onClick={() => setisFilterMenuHidden((prev: boolean) => !prev)}
         >
@@ -140,7 +143,7 @@ const MainLayout = () => {
               }}
             />
           </StyleSelectBTN>
-          <StyleUlOptions showdisplay={isFilterMenuHidden}>
+          <StyleUlOptions showdisplay={isFilterMenuHidden.toString()}>
             {optionArray.map((select) => (
               <StyledOptionSpan
                 key={select.value}
