@@ -35,7 +35,7 @@ const StyleH2Text = styled.h2`
   color: rgba(0, 0, 0, 1);
 `;
 
-export const StyleSelectMenu = styled.div<{ showitem?: string }>`
+export const StyleSelectMenu = styled.div<{ $showitem?: string }>`
   width: 157px;
   height: 32px;
   border-radius: 30px;
@@ -46,7 +46,7 @@ export const StyleSelectMenu = styled.div<{ showitem?: string }>`
   }
   cursor: pointer;
   @media screen and (max-width: 1020px) {
-    display: ${(props) => (props.showitem ? 'block' : 'none')};
+    display: ${(props) => (props.$showitem ? 'block' : 'none')};
   }
 `;
 
@@ -66,8 +66,8 @@ export const StyleSelectBTNTEXT = styled.span`
   line-height: 14.4px;
 `;
 
-export const StyleUlOptions = styled.ul<{ showdisplay: string }>`
-  display: ${(props) => (props.showdisplay == 'true' ? 'block' : 'none')};
+export const StyleUlOptions = styled.ul<{ $showdisplay: string }>`
+  display: ${(props) => (props.$showdisplay == 'true' ? 'block' : 'none')};
   position: relative;
   width: 200px;
   height: 222px;
@@ -143,7 +143,7 @@ const MainLayout = () => {
               }}
             />
           </StyleSelectBTN>
-          <StyleUlOptions showdisplay={isFilterMenuHidden.toString()}>
+          <StyleUlOptions $showdisplay={isFilterMenuHidden.toString()}>
             {optionArray.map((select) => (
               <StyledOptionSpan
                 key={select.value}

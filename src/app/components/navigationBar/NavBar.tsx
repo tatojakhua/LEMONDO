@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import home from '../../assets/menuHome.png';
+import { menuArray } from '@/constants/mobileItems';
 
 const StyledSection = styled.section`
   position: fixed;
@@ -16,12 +16,24 @@ const StyledSection = styled.section`
   }
 `;
 
+const StyleMainDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 0px 15px;
+  margin-top: 15px;
+`;
+
 const StyleContainerDiv = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
+  max-width: 130px;
+  cursor: pointer;
 `;
 
 const StyleTextH4 = styled.h4`
@@ -36,14 +48,18 @@ const StyleTextH4 = styled.h4`
 const NavBar: React.FC = () => {
   return (
     <StyledSection>
-      <StyleContainerDiv>
-        <Image
-          src={home}
-          alt="home"
-          style={{ width: '24px', height: '24px' }}
-        />
-        <StyleTextH4>მთავარი</StyleTextH4>
-      </StyleContainerDiv>
+      <StyleMainDiv>
+        {menuArray.map((item) => (
+          <StyleContainerDiv key={item.id}>
+            <Image
+              src={item.img}
+              alt={item.text}
+              style={{ width: '24px', height: '24px', marginBottom: '8px' }}
+            />
+            <StyleTextH4>{item.text}</StyleTextH4>
+          </StyleContainerDiv>
+        ))}
+      </StyleMainDiv>
     </StyledSection>
   );
 };

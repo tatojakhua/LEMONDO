@@ -33,7 +33,7 @@ const MobileLayOut = () => {
   return (
     <>
       <StyleSelectMenu
-        showitem="true"
+        $showitem="true"
         onClick={() => setisFilterMenuHidden((prev: boolean) => !prev)}
       >
         <StyleSelectBTN>
@@ -49,7 +49,7 @@ const MobileLayOut = () => {
             }}
           />
         </StyleSelectBTN>
-        <StyleUlOptions showdisplay={isFilterMenuHidden.toString()}>
+        <StyleUlOptions $showdisplay={isFilterMenuHidden.toString()}>
           {optionArray.map((select) => (
             <StyledOptionSpan
               key={select.value}
