@@ -93,9 +93,9 @@ export const StyledOptionSpan = styled.li`
   }
 `;
 
-export const StyledDiv = styled.div`
+export const StyledDiv = styled.div<{ $full?: string }>`
   position: absolute;
-  width: calc(100% - 30px);
+  width: ${(props) => (props.$full ? '100%' : 'calc(100% - 30px)')};
   height: 2px;
   background: rgba(242, 242, 242, 1);
   bottom: 0;
