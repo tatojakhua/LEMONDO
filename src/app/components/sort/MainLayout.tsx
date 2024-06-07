@@ -36,7 +36,7 @@ const StyleH2Text = styled.h2`
 `;
 
 export const StyleSelectMenu = styled.div<{ $showitem?: string }>`
-  width: 157px;
+  width: 170px;
   height: 32px;
   border-radius: 30px;
   background-color: rgba(242, 242, 242, 1);
@@ -138,6 +138,7 @@ const MainLayout = () => {
               style={{
                 width: '12px',
                 height: '7px',
+                marginLeft: '15px',
                 transition: '0.3s',
                 transform: isFilterMenuHidden ? 'rotate(-180deg)' : 'none',
               }}

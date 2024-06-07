@@ -13,14 +13,15 @@ import { StyledDiv } from '../sort/MainLayout';
 
 const StyleSection = styled.section<{ $isFilterHidden: string }>`
   width: 450px;
-  height: auto;
+  height: 1417px;
   @media screen and (max-width: 1020px) {
     display: ${(props) => (props.$isFilterHidden == 'true' ? 'block' : 'none')};
-    width: 280px;
+    width: 350px;
     position: absolute;
-    right: 15px;
+    right: 0;
     top: 50px;
     background-color: rgba(255, 255, 255, 1);
+    padding: 0 20px;
   }
 `;
 
@@ -152,13 +153,12 @@ const Filter: React.FC<FIlterProps> = ({
   return (
     <StyleSection $isFilterHidden={isFilterHidden.toString()}>
       <StyleFilterHead>
-        <StyleCloseBTN>
+        <StyleCloseBTN onClick={handleCloseBTN}>
           {isFilterHidden && (
             <Image
               src={close}
               alt="close"
-              style={{ width: '12px', height: '12.12px' }}
-              onClick={handleCloseBTN}
+              style={{ width: '12px', height: '12.12px', cursor: 'pointer' }}
             />
           )}
           <StyleTitle>ფილტრი</StyleTitle>
