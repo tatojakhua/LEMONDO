@@ -36,7 +36,7 @@ const StyleH2Text = styled.h2`
 `;
 
 export const StyleSelectMenu = styled.div<{ $showitem?: string }>`
-  width: 170px;
+  width: ${(props) => (props.$showitem ? '130px' : '170px')};
   height: 32px;
   border-radius: 30px;
   background-color: rgba(242, 242, 242, 1);
@@ -79,7 +79,6 @@ export const StyleUlOptions = styled.ul<{ $showdisplay: string }>`
 
 export const StyledOptionSpan = styled.li`
   display: flex;
-  width: 160px;
   height: 22px;
   font-family: FiraGo;
   font-weight: 500;

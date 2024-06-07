@@ -108,6 +108,8 @@ const Filter: React.FC<FIlterProps> = ({
   const [isWeightHidden, setIsWeightHidden] = useState(true);
   const [isScreenSizeHidden, setIsScreenSizeHidden] = useState(true);
 
+  console.log(sliderValue, year, weight, screenSize);
+
   const restFilterArray: Array<string> = [
     'სიმ ბარათი-SIM',
     'ოპერაციული სისტემა',

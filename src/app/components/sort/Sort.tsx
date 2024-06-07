@@ -41,7 +41,7 @@ const StyleFilter = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 157px;
+  width: 130px;
   height: 32px;
   border-radius: 30px;
   background-color: rgba(242, 242, 242, 1);
