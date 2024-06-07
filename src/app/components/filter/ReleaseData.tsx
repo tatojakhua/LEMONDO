@@ -10,7 +10,8 @@ export const StyleMainContainer = styled.div`
 `;
 
 export const StyleShowMore = styled.button`
-  width: 100px;
+  text-align: start;
+  width: 100%;
   height: 20px;
   background: none;
   border: none;

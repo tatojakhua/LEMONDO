@@ -59,7 +59,6 @@ export const StyleSelectBTN = styled.div`
 `;
 
 export const StyleSelectBTNTEXT = styled.span`
-  width: 62px;
   height: 14px;
   font-family: FiraGo;
   font-weight: 500;
@@ -138,7 +137,6 @@ const MainLayout = () => {
               style={{
                 width: '12px',
                 height: '7px',
-                marginLeft: '15px',
                 transition: '0.3s',
                 transform: isFilterMenuHidden ? 'rotate(-180deg)' : 'none',
               }}
