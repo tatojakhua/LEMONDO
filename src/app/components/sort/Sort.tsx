@@ -75,7 +75,9 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
           onClick={() => setisFilterMenuHidden((prev: boolean) => !prev)}
         >
           <StyleSelectBTN>
-            <StyleSelectBTNTEXT>{selectValue}</StyleSelectBTNTEXT>
+            <StyleSelectBTNTEXT $sortButton="10px">
+              {selectValue}
+            </StyleSelectBTNTEXT>
             <Image
               src={down}
               alt="down-button"

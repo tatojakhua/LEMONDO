@@ -16,6 +16,7 @@ const StyleInnerContainer = styled.div<{ width: string; end?: string }>`
   width: ${(props) => props.width};
   @media screen and (max-width: 1020px) {
     justify-content: ${(props) => (props.end ? 'end' : 'start')};
+    margin-right: ${(props) => props.end && '-5px'};
   }
 `;
 
@@ -58,11 +59,17 @@ export const StyleSelectBTN = styled.div`
   margin-top: 7px;
 `;
 
-export const StyleSelectBTNTEXT = styled.span`
+export const StyleSelectBTNTEXT = styled.span<{ $sortButton?: string }>`
   height: 14px;
   font-family: FiraGo;
   font-weight: 500;
   line-height: 14.4px;
+  @media screen and (max-width: 1020px) {
+    font-size: 12px;
+    margin-left: ${(props) => {
+      return props.$sortButton || '0';
+    }};
+  }
 `;
 
 export const StyleUlOptions = styled.ul<{ $showdisplay: string }>`
@@ -102,6 +109,7 @@ export const StyledDiv = styled.div<{ $full?: string }>`
 const MainLayout = () => {
   const [selectValue, setselectValue] = useState<string>('დალაგება');
   const [isFilterMenuHidden, setisFilterMenuHidden] = useState<boolean>(false);
+
   return (
     <>
       <StyleInnerContainer width="100px">

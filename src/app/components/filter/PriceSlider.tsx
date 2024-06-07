@@ -14,11 +14,14 @@ const StylePrice = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100px;
+  width: 154px;
   height: 42px;
   border-radius: 4px;
   border: 1px solid rgba(236, 94, 42, 1);
   margin-top: 20px;
+  @media screen and (max-width: 1020px) {
+    width: 100px;
+  }
 `;
 
 const StylePriceText = styled.h2`
@@ -30,6 +33,10 @@ const StylePriceText = styled.h2`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
+  @media screen and (max-width: 1020px) {
+    font-size: 10px;
+    margin-left: 10px;
+  }
 `;
 
 const StylePriceValueContainer = styled.div`
@@ -47,6 +54,9 @@ const StylePriceValue = styled.input`
   border: none;
   text-align: right;
   outline: none;
+  @media screen and (max-width: 1020px) {
+    font-size: 14px;
+  }
 `;
 
 interface PriceSliderProps {
@@ -60,26 +70,26 @@ const PriceSlider: React.FC<PriceSliderProps> = ({
 }) => {
   const handleSliderChange = (value: number | number[]) => {
     if (Array.isArray(value)) {
-      setSliderValue(value as [number, number]);
+      setSliderValue([value[0], value[1]]);
     }
   };
 
   const handleMinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.min(Math.max(Number(e.target.value), 0));
+    const value = Math.min(Math.max(Number(e.target.value), 0), sliderValue[1]);
     setSliderValue([value, sliderValue[1]]);
   };
 
   const handleMaxInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.max(Math.min(Number(e.target.value), 5399));
+    const value = Math.max(Math.min(Number(e.target.value), 22020));
     setSliderValue([sliderValue[0], value]);
   };
 
   return (
     <>
       <Slider
-        range={{ draggableTrack: true }}
+        range
         value={sliderValue}
-        max={5399}
+        max={22020}
         onChange={handleSliderChange}
       />
       <StylePriceContainer>
@@ -91,7 +101,7 @@ const PriceSlider: React.FC<PriceSliderProps> = ({
               value={sliderValue[0]}
               onChange={handleMinInputChange}
             />
-            <span>₾</span>
+            <span className="valute">₾</span>
           </StylePriceValueContainer>
         </StylePrice>
         <StylePrice>
@@ -102,7 +112,7 @@ const PriceSlider: React.FC<PriceSliderProps> = ({
               value={sliderValue[1]}
               onChange={handleMaxInputChange}
             />
-            <span>₾</span>
+            <span className="valute">₾</span>
           </StylePriceValueContainer>
         </StylePrice>
       </StylePriceContainer>
