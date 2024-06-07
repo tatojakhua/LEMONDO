@@ -16,7 +16,7 @@ const StyleSection = styled.section<{ $isFilterHidden: string }>`
   height: 1417px;
   @media screen and (max-width: 1020px) {
     display: ${(props) => (props.$isFilterHidden == 'true' ? 'block' : 'none')};
-    width: 350px;
+    width: 230px;
     position: absolute;
     right: 0;
     top: 50px;

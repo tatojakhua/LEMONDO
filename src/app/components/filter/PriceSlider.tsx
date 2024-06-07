@@ -14,7 +14,7 @@ const StylePrice = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 154px;
+  width: 100px;
   height: 42px;
   border-radius: 4px;
   border: 1px solid rgba(236, 94, 42, 1);
