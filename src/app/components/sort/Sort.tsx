@@ -99,15 +99,13 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
             ))}
           </StyleUlOptions>
         </StyleSelectMenu>
-        <StyleFilter>
+        <StyleFilter onClick={handleFilterCLick}>
           <Image
             src={filter}
             alt="filter"
             style={{ width: '20px', height: '20px', margin: '0 15px' }}
           />
-          <StyleSelectBTNTEXT onClick={handleFilterCLick}>
-            ფილტრი
-          </StyleSelectBTNTEXT>
+          <StyleSelectBTNTEXT>ფილტრი</StyleSelectBTNTEXT>
         </StyleFilter>
         <StyledDiv />
       </MobileOnlySection>
