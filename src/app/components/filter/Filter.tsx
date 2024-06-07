@@ -6,10 +6,11 @@ import trashcan from '../../assets/trash.png';
 import down from '../../assets/selectDown.png';
 import close from '../../assets/close.png';
 import PriceSlider from './PriceSlider';
-import ReleaseData from './ReleaseData';
-import Weight from './Weight';
-import ScreenSize from './ScreenSize';
+// import ReleaseData from './ReleaseData';
+// import Weight from './Weight';
+// import ScreenSize from './ScreenSize';
 import { StyledDiv } from '../sort/MainLayout';
+import { filterData } from '@/api/getFilterData';
 
 const StyleSection = styled.section<{ $isFilterHidden: string }>`
   width: 450px;
@@ -93,38 +94,58 @@ interface FIlterProps {
   setIsFilterHidden: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+type FilterValue = string;
+
+interface FilterType {
+  name: string;
+  values: FilterValue[];
+}
+
 const Filter: React.FC<FIlterProps> = ({
   isFilterHidden,
   setIsFilterHidden,
 }) => {
+  const [filterState, setFilterState] = useState<FilterType[]>([]);
+
   const [cleanFilter, setCleanFilter] = useState<boolean>(false);
   const [sliderValue, setSliderValue] = useState<[number, number]>([0, 5399]);
-  const [year, setYear] = useState<string[]>([]);
-  const [weight, setWeight] = useState<string[]>([]);
-  const [screenSize, setScreenSize] = useState<string[]>([]);
+  // const [year, setYear] = useState<string[]>([]);
+  // const [weight, setWeight] = useState<string[]>([]);
+  // const [screenSize, setScreenSize] = useState<string[]>([]);
 
   const [isPriceHidden, setIsPriceHidden] = useState(true);
   const [isYearHidden, setIsYearHidden] = useState(true);
-  const [isWeightHidden, setIsWeightHidden] = useState(true);
-  const [isScreenSizeHidden, setIsScreenSizeHidden] = useState(true);
+  // const [isWeightHidden, setIsWeightHidden] = useState(true);
+  // const [isScreenSizeHidden, setIsScreenSizeHidden] = useState(true);
 
-  console.log(sliderValue, year, weight, screenSize);
+  useEffect(() => {
+    filterData()
+      .then((data) => {
+        setSliderValue([data.minPrice, data.maxPrice]);
+        const filteredSpecifications = data.specifications.filter(
+          (_: any, index: number) => ![2, 5, 7].includes(index)
+        );
+        setFilterState(filteredSpecifications);
+      })
+      .catch((err) => console.log(err.message))
+      .finally(() => console.log('finally block'));
+  }, []);
 
-  const restFilterArray: Array<string> = [
-    'სიმ ბარათი-SIM',
-    'ოპერაციული სისტემა',
-    'ჩიპსეტი',
-    'პროცესორი',
-    'გრაფიკული პროცესორი',
-    'შიდა მეხსიერება',
-    'ოპერატიული მეხსიერება',
-  ];
+  // const restFilterArray: Array<string> = [
+  //   'სიმ ბარათი-SIM',
+  //   'ოპერაციული სისტემა',
+  //   'ჩიპსეტი',
+  //   'პროცესორი',
+  //   'გრაფიკული პროცესორი',
+  //   'შიდა მეხსიერება',
+  //   'ოპერატიული მეხსიერება',
+  // ];
 
   useEffect(() => {
     setSliderValue([0, 5399]);
-    setYear([]);
-    setWeight([]);
-    setScreenSize([]);
+    // setYear([]);
+    // setWeight([]);
+    // setScreenSize([]);
     setCleanFilter(false);
   }, [cleanFilter]);
 
@@ -144,13 +165,13 @@ const Filter: React.FC<FIlterProps> = ({
     setIsYearHidden((prev) => !prev);
   };
 
-  const toggleWeightVisibility = () => {
-    setIsWeightHidden((prev) => !prev);
-  };
+  // const toggleWeightVisibility = () => {
+  //   setIsWeightHidden((prev) => !prev);
+  // };
 
-  const toggleScreenSizeVisibility = () => {
-    setIsScreenSizeHidden((prev) => !prev);
-  };
+  // const toggleScreenSizeVisibility = () => {
+  //   setIsScreenSizeHidden((prev) => !prev);
+  // };
 
   return (
     <StyleSection $isFilterHidden={isFilterHidden.toString()}>
@@ -183,7 +204,7 @@ const Filter: React.FC<FIlterProps> = ({
         <StyledDiv $full="true" />
       </StyleFilterHead>
 
-      <StyleSectionContainer>
+      <StyleSectionContainer onClick={togglePriceVisibility}>
         <StyleSectionTitle>ფასი</StyleSectionTitle>
         <Image
           src={down}
@@ -195,7 +216,6 @@ const Filter: React.FC<FIlterProps> = ({
             transform: isPriceHidden ? 'rotate(-180deg)' : 'none',
             cursor: 'pointer',
           }}
-          onClick={togglePriceVisibility}
         />
       </StyleSectionContainer>
       {isPriceHidden && (
@@ -205,7 +225,25 @@ const Filter: React.FC<FIlterProps> = ({
         />
       )}
 
-      <StyleSectionContainer>
+      {filterState.map((item) => (
+        <StyleSectionContainer key={item.name}>
+          <StyleSectionTitle>{item.name}</StyleSectionTitle>
+          <Image
+            src={down}
+            alt="down"
+            style={{
+              width: '15px',
+              height: '10px',
+              transition: '0.3s',
+              transform: isYearHidden ? 'rotate(-180deg)' : 'none',
+              cursor: 'pointer',
+            }}
+            onClick={toggleYearVisibility}
+          />
+        </StyleSectionContainer>
+      ))}
+
+      {/* <StyleSectionContainer>
         <StyleSectionTitle>გამოშვების თარიღი</StyleSectionTitle>
         <Image
           src={down}
@@ -271,7 +309,7 @@ const Filter: React.FC<FIlterProps> = ({
             }}
           />
         </StyleSectionContainer>
-      ))}
+      ))} */}
     </StyleSection>
   );
 };
