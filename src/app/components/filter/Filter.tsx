@@ -9,6 +9,8 @@ import PriceSlider from './PriceSlider';
 import CheckBox from './Checkbox';
 import { StyledDiv } from '../sort/MainLayout';
 import { filterData } from '@/api/getFilterData';
+import { useProductsContext } from '@/context/products/ProductsContextProvider';
+import { setFilter, setPriceRange } from '@/context/actions/actionCreators';
 
 const StyleSection = styled.section<{ $isFilterHidden: string }>`
   width: 450px;
@@ -114,6 +116,7 @@ const Filter: React.FC<FIlterProps> = ({
   isFilterHidden,
   setIsFilterHidden,
 }) => {
+  const { dispatch } = useProductsContext();
   const [filterState, setFilterState] = useState<FilterType[]>([]);
   const [sliderValue, setSliderValue] = useState<[number, number]>([0, 0]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
@@ -124,14 +127,22 @@ const Filter: React.FC<FIlterProps> = ({
   }>({});
 
   useEffect(() => {
-    filterData().then((data) => {
-      setSliderValue([data.minPrice, data.maxPrice]);
-      const filteredSpecifications = data.specifications.filter(
-        (_: any, index: number) => ![2, 5, 7].includes(index)
-      );
-      setFilterState(filteredSpecifications);
-    });
+    filterData()
+      .then((data) => {
+        setSliderValue([data.minPrice, data.maxPrice]);
+        const filteredSpecifications = data.specifications.filter(
+          (_: any, index: number) => ![2, 5, 7].includes(index)
+        );
+        setFilterState(filteredSpecifications);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => console.log('finally'));
   }, []);
+
+  useEffect(() => {
+    dispatch(setPriceRange(sliderValue));
+    dispatch(setFilter(checkedValues));
+  }, [sliderValue, checkedValues]);
 
   const handleCleanFilter = () => {
     setSliderValue([0, 22020]);
