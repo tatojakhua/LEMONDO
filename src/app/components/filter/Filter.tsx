@@ -115,7 +115,7 @@ const Filter: React.FC<FIlterProps> = ({
   setIsFilterHidden,
 }) => {
   const [filterState, setFilterState] = useState<FilterType[]>([]);
-  const [sliderValue, setSliderValue] = useState<[number, number]>([0, 5399]);
+  const [sliderValue, setSliderValue] = useState<[number, number]>([0, 0]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
   const [isPriceHidden, setIsPriceHidden] = useState(true);
