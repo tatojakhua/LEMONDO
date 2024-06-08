@@ -124,16 +124,13 @@ const Filter: React.FC<FIlterProps> = ({
   }>({});
 
   useEffect(() => {
-    filterData()
-      .then((data) => {
-        setSliderValue([data.minPrice, data.maxPrice]);
-        const filteredSpecifications = data.specifications.filter(
-          (_: any, index: number) => ![2, 5, 7].includes(index)
-        );
-        setFilterState(filteredSpecifications);
-      })
-      .catch((err) => console.log(err.message))
-      .finally(() => console.log('finally block'));
+    filterData().then((data) => {
+      setSliderValue([data.minPrice, data.maxPrice]);
+      const filteredSpecifications = data.specifications.filter(
+        (_: any, index: number) => ![2, 5, 7].includes(index)
+      );
+      setFilterState(filteredSpecifications);
+    });
   }, []);
 
   const handleCleanFilter = () => {
