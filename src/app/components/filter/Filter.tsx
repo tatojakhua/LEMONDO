@@ -210,7 +210,7 @@ const Filter: React.FC<FIlterProps> = ({
 
       {filterState.map((item) => (
         <StyleSectionContainer key={item.name}>
-          <StyleHead>
+          <StyleHead onClick={() => toggleFilterVisibility(item.name)}>
             <StyleSectionTitle>{item.name}</StyleSectionTitle>
             <Image
               src={down}
@@ -224,7 +224,6 @@ const Filter: React.FC<FIlterProps> = ({
                   : 'none',
                 cursor: 'pointer',
               }}
-              onClick={() => toggleFilterVisibility(item.name)}
             />
           </StyleHead>
           {!filterVisibility[item.name] && (
