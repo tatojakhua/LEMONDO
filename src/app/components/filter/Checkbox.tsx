@@ -11,7 +11,7 @@ export const StyleMainContainer = styled.div`
 
 export const StyleShowMore = styled.button`
   text-align: start;
-  width: 100%;
+  width: 150%;
   height: 20px;
   background: none;
   border: none;
@@ -24,30 +24,25 @@ export const StyleShowMore = styled.button`
   cursor: pointer;
 `;
 
-interface ReleaseDataProps {
-  year: string[];
-  setYear: React.Dispatch<React.SetStateAction<string[]>>;
+interface CheckBoxProps {
+  values: { id: number; value: string }[];
+  checkedValues: string[];
+  setCheckedValues: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const ReleaseData: React.FC<ReleaseDataProps> = ({ year, setYear }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({
+  values,
+  checkedValues,
+  setCheckedValues,
+}) => {
   const [showMore, setShowMore] = useState(false);
-
-  const yearsArray: Array<string> = [
-    '2018',
-    '2019',
-    '2020',
-    '2021',
-    '2022',
-    '2023',
-    '2024',
-  ];
 
   const onChange = (e: CheckboxChangeEvent) => {
     const { value, checked } = e.target;
     if (checked) {
-      setYear((prev) => [...prev, value]);
+      setCheckedValues((prev) => [...prev, value]);
     } else {
-      setYear((prev) => prev.filter((item) => item !== value));
+      setCheckedValues((prev) => prev.filter((item) => item !== value));
     }
   };
 
@@ -60,34 +55,35 @@ const ReleaseData: React.FC<ReleaseDataProps> = ({ year, setYear }) => {
   return (
     <StyleMainContainer>
       {showMore
-        ? yearsArray.map((item) => (
+        ? values.map((item) => (
             <Checkbox
-              key={item}
+              key={item.id}
               onChange={onChange}
-              value={item}
+              value={item.id.toString()}
               style={{ marginBottom: '15px' }}
-              checked={year.includes(item)}
+              checked={checkedValues.includes(item.id.toString())}
             >
-              {item}
+              {item.value}
             </Checkbox>
           ))
-        : yearsArray.slice(0, 3).map((item) => (
+        : values.slice(0, 3).map((item) => (
             <Checkbox
-              key={item}
+              key={item.id}
               onChange={onChange}
-              value={item}
+              value={item.id.toString()}
               style={{ marginBottom: '15px' }}
-              checked={year.includes(item)}
+              checked={checkedValues.includes(item.id.toString())}
             >
-              {item}
+              {item.value}
             </Checkbox>
           ))}
-
-      <StyleShowMore onClick={handleShowMoreClick}>
-        {showMore ? 'აკეცვა' : 'მეტის ნახვა'}
-      </StyleShowMore>
+      {values.length > 3 && (
+        <StyleShowMore onClick={handleShowMoreClick}>
+          {showMore ? 'აკეცვა' : 'მეტის ნახვა'}
+        </StyleShowMore>
+      )}
     </StyleMainContainer>
   );
 };
 
-export default ReleaseData;
+export default CheckBox;
