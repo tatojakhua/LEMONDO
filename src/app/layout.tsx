@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import './global.css';
+import { ProductsContextProvider } from '@/context/products/ProductsContextProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ProductsContextProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </ProductsContextProvider>
   );
 }
