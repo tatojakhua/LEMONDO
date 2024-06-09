@@ -5,21 +5,43 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Product from './Product';
 
-// Define the Product type
+const StyleSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+`;
+
+const StyleButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 150px;
+
+  button {
+    width: 120px;
+    height: 40px;
+    border-radius: 90px;
+    border: none;
+    background-color: rgba(242, 242, 242, 1);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 14.4px;
+    cursor: pointer;
+  }
+`;
 type ProductType = {
   id: number;
   name: string;
   barCode: string;
   description: string | null;
   sellType: string | null;
+  imageUrl: string;
+  parentCategoryName: string;
   [key: string]: any;
 };
-
-const StyleSection = styled.section`
-  width: 100%;
-  height: auto;
-  border: 1px solid red;
-`;
 
 const Products = () => {
   const { state } = useProductsContext();
@@ -57,7 +79,9 @@ const Products = () => {
       {products?.map((item) => (
         <Product key={item.id} item={item} />
       ))}
-      <button onClick={handleSeeMoreClick}>ნახე მეტ</button>
+      <StyleButtonContainer>
+        <button onClick={handleSeeMoreClick}>ნახე მეტ</button>
+      </StyleButtonContainer>
     </StyleSection>
   );
 };
