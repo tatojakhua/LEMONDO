@@ -2,13 +2,14 @@
 import React from 'react';
 import OrangeContainer from './OrangeContainer';
 import SearchContainer from './SearchContainer';
+import { StyledHeader } from './styled-components';
 
 const Header: React.FC = () => {
   return (
-    <header style={{ display: 'flex', flexDirection: 'column' }}>
+    <StyledHeader>
       <OrangeContainer />
       <SearchContainer />
-    </header>
+    </StyledHeader>
   );
 };
 

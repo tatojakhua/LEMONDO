@@ -1,56 +1,21 @@
 'use client';
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import Image from 'next/image';
-import down from '../../assets/selectDown.png';
-import filter from '../../assets/filter.png';
-import MainLayout, {
+import { optionArray } from '@/constants';
+import MainLayout from './MainLayout';
+
+import {
+  DownButton,
+  FilterIcon,
+  MobileOnlySection,
+  StyleFilter,
+  StyleSection,
   StyleSelectBTN,
   StyleSelectBTNTEXT,
   StyleSelectMenu,
   StyleUlOptions,
   StyledDiv,
   StyledOptionSpan,
-} from './MainLayout';
-import './sort.css';
-import { optionArray } from '@/constants';
-
-const StyleSection = styled.section`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0px auto;
-  padding: 0px 15px;
-  height: 92px;
-
-  @media screen and (max-width: 1020px) {
-    height: 59px;
-  }
-`;
-
-const MobileOnlySection = styled(StyleSection)`
-  @media screen and (min-width: 1020px) {
-    display: none;
-  }
-`;
-
-const StyleFilter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 130px;
-  height: 32px;
-  border-radius: 30px;
-  background-color: rgba(242, 242, 242, 1);
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-  &:hover {
-    background-color: rgba(255, 255, 255, 1);
-  }
-  cursor: pointer;
-`;
+} from './styled-components';
 
 interface SortProps {
   setIsFilterHidden: React.Dispatch<React.SetStateAction<boolean>>;
@@ -78,16 +43,7 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
             <StyleSelectBTNTEXT $sortButton="10px">
               {selectValue}
             </StyleSelectBTNTEXT>
-            <Image
-              src={down}
-              alt="down-button"
-              style={{
-                width: '12px',
-                height: '7px',
-                transition: '0.3s',
-                transform: isFilterMenuHidden ? 'rotate(-180deg)' : 'none',
-              }}
-            />
+            <DownButton isHidden={isFilterMenuHidden} />
           </StyleSelectBTN>
           <StyleUlOptions $showdisplay={isFilterMenuHidden.toString()}>
             {optionArray.map((select) => (
@@ -102,11 +58,7 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
           </StyleUlOptions>
         </StyleSelectMenu>
         <StyleFilter onClick={handleFilterCLick}>
-          <Image
-            src={filter}
-            alt="filter"
-            style={{ width: '20px', height: '20px', margin: '0 15px' }}
-          />
+          <FilterIcon />
           <StyleSelectBTNTEXT>ფილტრი</StyleSelectBTNTEXT>
         </StyleFilter>
         <StyledDiv />
