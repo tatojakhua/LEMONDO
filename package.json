@@ -12,10 +12,11 @@
   "dependencies": {
     "antd": "^5.18.0",
     "axios": "^1.7.2",
+    "babel-plugin-styled-components": "^2.0.7",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "babel-plugin-styled-components": "^2.0.7",
+    "react-spinners": "^0.13.8",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

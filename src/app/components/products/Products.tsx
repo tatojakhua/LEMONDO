@@ -1,9 +1,10 @@
 'use client';
-import { productsData } from '@/api/getProducts';
+import { productsData } from '../../../utils/getProducts';
 import { useProductsContext } from '@/context/products/ProductsContextProvider';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Product from './Product';
+import { FadeLoader } from 'react-spinners';
 
 const StyleSection = styled.section`
   display: flex;
@@ -31,6 +32,13 @@ const StyleButtonContainer = styled.div`
     line-height: 14.4px;
     cursor: pointer;
   }
+`;
+
+const StyleLoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
 type ProductType = {
   id: number;
@@ -75,13 +83,22 @@ const Products = () => {
 
   return (
     <StyleSection>
-      {isProductsLoading && <h1>Loading...</h1>}
-      {products?.map((item) => (
-        <Product key={item.id} item={item} />
-      ))}
-      <StyleButtonContainer>
-        <button onClick={handleSeeMoreClick}>ნახე მეტ</button>
-      </StyleButtonContainer>
+      {isProductsLoading ? (
+        <StyleLoaderContainer>
+          <FadeLoader color="rgba(236, 94, 42, 1)" />
+        </StyleLoaderContainer>
+      ) : (
+        <>
+          {products?.map((item) => (
+            <Product key={item.id} item={item} />
+          ))}
+          {products.length > 11 && (
+            <StyleButtonContainer>
+              <button onClick={handleSeeMoreClick}>ნახე მეტი</button>
+            </StyleButtonContainer>
+          )}
+        </>
+      )}
     </StyleSection>
   );
 };

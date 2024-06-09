@@ -80,10 +80,7 @@ const PriceSlider: React.FC<PriceSliderProps> = ({
   };
 
   const handleMaxInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Math.max(
-      Math.min(Number(e.target.value), 22020),
-      sliderValue[0]
-    );
+    const value = Math.max(Math.min(Number(e.target.value), 22020));
     setSliderValue([sliderValue[0], value]);
   };
 
