@@ -8,9 +8,10 @@ import close from '../../assets/close.png';
 import PriceSlider from './PriceSlider';
 import CheckBox from './Checkbox';
 import { StyledDiv } from '../sort/MainLayout';
-import { filterData } from '@/api/getFilterData';
+import { filterData } from '../../../utils/getFilterData';
 import { useProductsContext } from '@/context/products/ProductsContextProvider';
 import { setFilter, setPriceRange } from '@/context/actions/actionCreators';
+import { FadeLoader } from 'react-spinners';
 
 const StyleSection = styled.section<{ $isFilterHidden: string }>`
   width: 450px;
@@ -23,6 +24,7 @@ const StyleSection = styled.section<{ $isFilterHidden: string }>`
     top: 50px;
     background-color: rgba(255, 255, 255, 1);
     padding: 0 20px;
+    z-index: 100;
   }
 `;
 
@@ -118,6 +120,9 @@ const Filter: React.FC<FIlterProps> = ({
 }) => {
   const { dispatch } = useProductsContext();
   const [filterState, setFilterState] = useState<FilterType[]>([]);
+  const [isFilterDataLoading, setIsFilterDataLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const [sliderValue, setSliderValue] = useState<[number, number]>([0, 0]);
   const [checkedValues, setCheckedValues] = useState<string[]>([]);
 
@@ -127,6 +132,7 @@ const Filter: React.FC<FIlterProps> = ({
   }>({});
 
   useEffect(() => {
+    setIsFilterDataLoading(true);
     filterData()
       .then((data) => {
         setSliderValue([data.minPrice, data.maxPrice]);
@@ -135,8 +141,8 @@ const Filter: React.FC<FIlterProps> = ({
         );
         setFilterState(filteredSpecifications);
       })
-      .catch((err) => console.log(err))
-      .finally(() => console.log('finally'));
+      .catch((err) => setError(err.message))
+      .finally(() => setIsFilterDataLoading(true));
   }, []);
 
   useEffect(() => {
@@ -164,85 +170,103 @@ const Filter: React.FC<FIlterProps> = ({
     }));
   };
 
+  if (error) {
+    return (
+      <div>
+        <h1>{error}</h1>
+      </div>
+    );
+  }
+
   return (
     <StyleSection $isFilterHidden={isFilterHidden.toString()}>
-      <StyleFilterHead>
-        <StyleCloseBTN onClick={handleCloseBTN}>
-          {isFilterHidden && (
-            <Image
-              src={close}
-              alt="close"
-              style={{ width: '12px', height: '12.12px', cursor: 'pointer' }}
+      {!isFilterDataLoading ? (
+        <FadeLoader color="rgba(236, 94, 42, 1)" />
+      ) : (
+        <>
+          <StyleFilterHead>
+            <StyleCloseBTN onClick={handleCloseBTN}>
+              {isFilterHidden && (
+                <Image
+                  src={close}
+                  alt="close"
+                  style={{
+                    width: '12px',
+                    height: '12.12px',
+                    cursor: 'pointer',
+                  }}
+                />
+              )}
+              <StyleTitle>ფილტრი</StyleTitle>
+            </StyleCloseBTN>
+            <StyleClear onClick={handleCleanFilter}>
+              <Image
+                src={trashcan}
+                alt="trashcan"
+                style={{
+                  width: '14px',
+                  height: '16.6px',
+                  opacity: '0.6',
+                  marginRight: '5px',
+                }}
+              />
+              <StyleTrashcanTitle>გასუფთავება</StyleTrashcanTitle>
+            </StyleClear>
+            <StyledDiv $full="true" />
+          </StyleFilterHead>
+
+          <StyleSectionContainer onClick={togglePriceVisibility}>
+            <StyleHead>
+              <StyleSectionTitle>ფასი</StyleSectionTitle>
+              <Image
+                src={down}
+                alt="down"
+                style={{
+                  width: '15px',
+                  height: '10px',
+                  transition: '0.3s',
+                  transform: isPriceHidden ? 'rotate(-180deg)' : 'none',
+                  cursor: 'pointer',
+                }}
+              />
+            </StyleHead>
+          </StyleSectionContainer>
+          {isPriceHidden && (
+            <PriceSlider
+              sliderValue={sliderValue}
+              setSliderValue={setSliderValue}
             />
           )}
-          <StyleTitle>ფილტრი</StyleTitle>
-        </StyleCloseBTN>
-        <StyleClear onClick={handleCleanFilter}>
-          <Image
-            src={trashcan}
-            alt="trashcan"
-            style={{
-              width: '14px',
-              height: '16.6px',
-              opacity: '0.6',
-              marginRight: '5px',
-            }}
-          />
-          <StyleTrashcanTitle>გასუფთავება</StyleTrashcanTitle>
-        </StyleClear>
-        <StyledDiv $full="true" />
-      </StyleFilterHead>
 
-      <StyleSectionContainer onClick={togglePriceVisibility}>
-        <StyleHead>
-          <StyleSectionTitle>ფასი</StyleSectionTitle>
-          <Image
-            src={down}
-            alt="down"
-            style={{
-              width: '15px',
-              height: '10px',
-              transition: '0.3s',
-              transform: isPriceHidden ? 'rotate(-180deg)' : 'none',
-              cursor: 'pointer',
-            }}
-          />
-        </StyleHead>
-      </StyleSectionContainer>
-      {isPriceHidden && (
-        <PriceSlider
-          sliderValue={sliderValue}
-          setSliderValue={setSliderValue}
-        />
+          {filterState.map((item) => (
+            <StyleSectionContainer key={item.name}>
+              <StyleHead onClick={() => toggleFilterVisibility(item.name)}>
+                <StyleSectionTitle>{item.name}</StyleSectionTitle>
+                <Image
+                  src={down}
+                  alt="down"
+                  style={{
+                    width: '15px',
+                    height: '10px',
+                    transition: '0.3s',
+                    transform: !filterVisibility[item.name]
+                      ? 'rotate(-180deg)'
+                      : 'none',
+                    cursor: 'pointer',
+                  }}
+                />
+              </StyleHead>
+              {!filterVisibility[item.name] && (
+                <CheckBox
+                  values={item.values}
+                  checkedValues={checkedValues}
+                  setCheckedValues={setCheckedValues}
+                />
+              )}
+            </StyleSectionContainer>
+          ))}
+        </>
       )}
-
-      {filterState.map((item) => (
-        <StyleSectionContainer key={item.name}>
-          <StyleHead onClick={() => toggleFilterVisibility(item.name)}>
-            <StyleSectionTitle>{item.name}</StyleSectionTitle>
-            <Image
-              src={down}
-              alt="down"
-              style={{
-                width: '15px',
-                height: '10px',
-                transition: '0.3s',
-                transform: !filterVisibility[item.name]
-                  ? 'rotate(-180deg)'
-                  : 'none',
-                cursor: 'pointer',
-              }}
-            />
-          </StyleHead>
-          {!filterVisibility[item.name] && (
-            <CheckBox
-              values={item.values}
-              checkedValues={checkedValues}
-              setCheckedValues={setCheckedValues}
-            />
-          )}
-        </StyleSectionContainer>
-      ))}
     </StyleSection>
   );
 };

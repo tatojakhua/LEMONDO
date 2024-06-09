@@ -93,6 +93,7 @@ export const StyledOptionSpan = styled.li`
   padding-top: 9px;
   margin-left: -10px;
   border-radius: 8px;
+  width: calc(100% - 20px);
   &:hover {
     background-color: rgba(242, 242, 242, 1);
   }
