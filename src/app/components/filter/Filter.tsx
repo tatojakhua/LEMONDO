@@ -7,11 +7,11 @@ import down from '../../assets/selectDown.png';
 import close from '../../assets/close.png';
 import PriceSlider from './PriceSlider';
 import CheckBox from './Checkbox';
-import { StyledDiv } from '../sort/MainLayout';
 import { filterData } from '../../../utils/getFilterData';
 import { useProductsContext } from '@/context/products/ProductsContextProvider';
 import { setFilter, setPriceRange } from '@/context/actions/actionCreators';
 import { FadeLoader } from 'react-spinners';
+import { StyledDiv } from '../sort/styled-components';
 
 const StyleSection = styled.section<{ $isFilterHidden: string }>`
   width: 450px;
