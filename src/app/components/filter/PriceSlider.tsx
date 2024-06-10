@@ -1,68 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Slider } from 'antd';
-import './PriceSlider.css';
-
-const StylePriceContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const StylePrice = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 154px;
-  height: 42px;
-  border-radius: 4px;
-  border: 1px solid rgba(236, 94, 42, 1);
-  margin-top: 20px;
-  @media screen and (max-width: 1020px) {
-    width: 100px;
-  }
-`;
-
-const StylePriceText = styled.h2`
-  position: relative;
-  width: 30px;
-  height: 20px;
-  opacity: 0.6;
-  font-family: FiraGo;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  @media screen and (max-width: 1020px) {
-    font-size: 10px;
-    margin-left: 10px;
-  }
-`;
-
-const StylePriceValueContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StylePriceValue = styled.input`
-  width: 47px;
-  height: 20px;
-  font-family: FiraGO;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 20px;
-  border: none;
-  text-align: right;
-  outline: none;
-  @media screen and (max-width: 1020px) {
-    font-size: 14px;
-  }
-`;
-
-interface PriceSliderProps {
-  sliderValue: [number, number];
-  setSliderValue: React.Dispatch<React.SetStateAction<[number, number]>>;
-}
+import {
+  GlobalStyles,
+  StylePrice,
+  StylePriceContainer,
+  StylePriceText,
+  StylePriceValue,
+  StylePriceValueContainer,
+} from './styled-components';
+import { PriceSliderProps } from './interface-type';
 
 const PriceSlider: React.FC<PriceSliderProps> = ({
   sliderValue,
@@ -86,6 +32,7 @@ const PriceSlider: React.FC<PriceSliderProps> = ({
 
   return (
     <>
+      <GlobalStyles />
       <Slider
         range
         value={sliderValue}

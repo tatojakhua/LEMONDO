@@ -7,7 +7,7 @@ import grid1 from '../../assets/grid1.png';
 import grid2 from '../../assets/grid2.png';
 
 //-- Sort --//
-export const StyleSection = styled.section`
+export const StyleSection = styled.section<{ top?: string }>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -19,7 +19,8 @@ export const StyleSection = styled.section`
   height: 92px;
 
   @media screen and (max-width: 1020px) {
-    height: 59px;
+    height: 70px;
+    ${(props) => props.top && 'margin-top: 65px;'}
   }
 `;
 
@@ -156,9 +157,6 @@ export const StyledOptionSpan = styled.li`
   margin-left: -10px;
   border-radius: 8px;
   width: calc(100% - 20px);
-  &:hover {
-    background-color: rgba(242, 242, 242, 1);
-  }
 `;
 
 export const StyledDiv = styled.div<{ $full?: string }>`

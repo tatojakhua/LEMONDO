@@ -100,6 +100,10 @@ export const GrayBox = styled.div`
   background: rgba(242, 242, 242, 1);
   width: 100%;
   height: 70px;
+  @media screen and (max-width: 1020px) {
+    position: fixed;
+    z-index: 10;
+  }
 `;
 
 export const SearchContent = styled.div`

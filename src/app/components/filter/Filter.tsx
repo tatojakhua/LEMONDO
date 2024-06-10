@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import styled from 'styled-components';
 import trashcan from '../../assets/trash.png';
 import down from '../../assets/selectDown.png';
 import close from '../../assets/close.png';
@@ -12,107 +11,18 @@ import { useProductsContext } from '@/context/products/ProductsContextProvider';
 import { setFilter, setPriceRange } from '@/context/actions/actionCreators';
 import { FadeLoader } from 'react-spinners';
 import { StyledDiv } from '../sort/styled-components';
-
-const StyleSection = styled.section<{ $isFilterHidden: string }>`
-  width: 450px;
-  height: 2300px;
-  @media screen and (max-width: 1020px) {
-    display: ${(props) => (props.$isFilterHidden == 'true' ? 'block' : 'none')};
-    width: 230px;
-    position: absolute;
-    right: 0;
-    top: 50px;
-    background-color: rgba(255, 255, 255, 1);
-    padding: 0 20px;
-    z-index: 100;
-  }
-`;
-
-const StyleSectionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  align-items: start;
-  margin-top: 20px;
-  margin-bottom: 20px;
-`;
-
-const StyleHead = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
-  @media screen and (max-width: 1020px) {
-    width: 230px;
-  }
-`;
-
-const StyleSectionTitle = styled.h2`
-  width: 100%;
-  height: 20px;
-  font-family: FiraGo;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-`;
-
-const StyleFilterHead = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 40px;
-`;
-
-const StyleTitle = styled.h2`
-  width: 72px;
-  height: 19px;
-  font-family: FiraGo;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 19.2px;
-  margin-left: 10px;
-  margin-bottom: 5px;
-`;
-
-const StyleClear = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  cursor: pointer;
-`;
-
-const StyleTrashcanTitle = styled.h3`
-  width: 80px;
-  height: 14px;
-  font-family: FiraGo;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 14.4px;
-  opacity: 0.9;
-`;
-
-const StyleCloseBTN = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 140px;
-`;
-
-interface FIlterProps {
-  isFilterHidden: boolean;
-  setIsFilterHidden: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-type FilterValue = { id: number; value: string };
-
-interface FilterType {
-  name: string;
-  values: FilterValue[];
-}
+import {
+  StyleClear,
+  StyleCloseBTN,
+  StyleFilterHead,
+  StyleHead,
+  StyleSection,
+  StyleSectionContainer,
+  StyleSectionTitle,
+  StyleTitle,
+  StyleTrashcanTitle,
+} from './styled-components';
+import { FIlterProps, FilterType } from './interface-type';
 
 const Filter: React.FC<FIlterProps> = ({
   isFilterHidden,

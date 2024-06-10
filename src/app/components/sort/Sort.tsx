@@ -31,7 +31,7 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
 
   return (
     <>
-      <StyleSection>
+      <StyleSection top="true">
         <MainLayout />
       </StyleSection>
       <MobileOnlySection>
