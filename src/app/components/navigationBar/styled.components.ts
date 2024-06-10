@@ -7,6 +7,7 @@ export const StyledSection = styled.section`
   height: 80px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(217, 217, 217, 1);
+  z-index: 100;
   @media screen and (min-width: 1020px) {
     display: none;
   }

@@ -1,34 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-
-export const StyleMainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const StyleShowMore = styled.button`
-  text-align: start;
-  width: 150%;
-  height: 20px;
-  background: none;
-  border: none;
-  margin-left: -10px;
-  font-family: FiraGO;
-  font-size: 16px;
-  font-weight: 350;
-  line-height: 20px;
-  color: rgba(236, 94, 42, 1);
-  cursor: pointer;
-`;
-
-interface CheckBoxProps {
-  values: { id: number; value: string }[];
-  checkedValues: string[];
-  setCheckedValues: React.Dispatch<React.SetStateAction<string[]>>;
-}
+import { StyleMainContainer, StyleShowMore } from './styled-components';
+import { CheckBoxProps } from './interface-type';
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   values,
