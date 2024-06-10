@@ -139,7 +139,7 @@ export const StyleUlOptions = styled.ul<{ $showdisplay: string }>`
   display: ${(props) => (props.$showdisplay == 'true' ? 'block' : 'none')};
   position: relative;
   width: 200px;
-  height: 222px;
+  height: 198px;
   border-radius: 12px;
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 1);

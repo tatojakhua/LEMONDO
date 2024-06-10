@@ -43,8 +43,6 @@ const Products = () => {
       const filter = state.filterData.join(',');
       productsData(limit, state.priceRange, filter)
         .then((data) => {
-          console.log(data);
-
           const sortedProducts = sortProducts(data.products);
           setProducts(sortedProducts);
         })
