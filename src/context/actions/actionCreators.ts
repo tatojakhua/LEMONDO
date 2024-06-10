@@ -1,4 +1,4 @@
-import { FILTER, PRICERANGE } from './actions';
+import { FILTER, PRICERANGE, SORT } from './actions';
 
 const setPriceRange = (payload: Array<number>) => {
   return {
@@ -14,4 +14,11 @@ const setFilter = (payload: Array<string>) => {
   };
 };
 
-export { setFilter, setPriceRange };
+const sortAction = (payload: string) => {
+  return {
+    type: SORT,
+    payload,
+  };
+};
+
+export { setFilter, setPriceRange, sortAction };

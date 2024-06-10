@@ -9,6 +9,5 @@ export const optionArray: Array<Option> = [
   { value: 'ზრდადობით', text: 'ფასი:ზრდადობით' },
   { value: 'A-Z', text: 'დასახელება:A-Z' },
   { value: 'Z-A', text: 'დასახელება:Z-A' },
-  { value: 'თარიღი', text: 'გამოშვების თარიღი' },
   { value: 'ფასდაკლება', text: 'ფასდაკლება' },
 ];

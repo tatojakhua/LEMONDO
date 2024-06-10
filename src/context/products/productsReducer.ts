@@ -1,8 +1,9 @@
-import { FILTER, PRICERANGE } from '../actions/actions';
+import { FILTER, PRICERANGE, SORT } from '../actions/actions';
 
 export interface State {
   priceRange: number[];
-  filterData: string[];
+  filterData: any[];
+  sort: string;
 }
 
 export interface Action {
@@ -13,6 +14,7 @@ export interface Action {
 export const initialState: State = {
   priceRange: [],
   filterData: [],
+  sort: '',
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -23,6 +25,10 @@ export const reducer = (state: State, action: Action): State => {
     }
     case FILTER: {
       return { ...state, filterData: payload };
+    }
+
+    case SORT: {
+      return { ...state, sort: payload };
     }
     default:
       return state;

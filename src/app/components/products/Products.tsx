@@ -18,12 +18,36 @@ const Products = () => {
   const [error, setError] = useState('');
   const [limit, setLimit] = useState(12);
 
+  const sortProducts = (products: ProductsType[]) => {
+    switch (state.sort) {
+      case 'პოპულარული':
+        return products.filter((product) => product.isFavorite);
+      case 'კლებადობით':
+        return products.sort((a, b) => b.price - a.price);
+      case 'ზრდადობით':
+        return products.sort((a, b) => a.price - b.price);
+      case 'A-Z':
+        return products.sort((a, b) => a.name.localeCompare(b.name));
+      case 'Z-A':
+        return products.sort((a, b) => b.name.localeCompare(a.name));
+      case 'ფასდაკლება':
+        return products.filter((product) => product.hasDiscount);
+      default:
+        return products;
+    }
+  };
+
   useEffect(() => {
     if (state.priceRange[1]) {
       setIsProductsLoading(true);
       const filter = state.filterData.join(',');
       productsData(limit, state.priceRange, filter)
-        .then((data) => setProducts(data.products))
+        .then((data) => {
+          console.log(data);
+
+          const sortedProducts = sortProducts(data.products);
+          setProducts(sortedProducts);
+        })
         .catch((err) => setError(err.message))
         .finally(() => setIsProductsLoading(false));
     }

@@ -16,17 +16,25 @@ import {
   StyledDiv,
   StyledOptionSpan,
 } from './styled-components';
+import { useProductsContext } from '@/context/products/ProductsContextProvider';
+import { sortAction } from '@/context/actions/actionCreators';
 
 interface SortProps {
   setIsFilterHidden: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
+  const { dispatch } = useProductsContext();
   const [selectValue, setselectValue] = useState<string>('დალაგება');
   const [isFilterMenuHidden, setisFilterMenuHidden] = useState<boolean>(false);
 
   const handleFilterCLick = () => {
     setIsFilterHidden((prev) => !prev);
+  };
+
+  const handleSelectClick = (value: string) => {
+    dispatch(sortAction(value));
+    setselectValue(value);
   };
 
   return (
@@ -50,7 +58,7 @@ const Sort: React.FC<SortProps> = ({ setIsFilterHidden }) => {
               <StyledOptionSpan
                 key={select.value}
                 value={select.value}
-                onClick={() => setselectValue(select.value)}
+                onClick={() => handleSelectClick(select.value)}
               >
                 {select.text}
               </StyledOptionSpan>
