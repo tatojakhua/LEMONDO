@@ -17,10 +17,18 @@ import {
   StyledDiv,
   StyledOptionSpan,
 } from './styled-components';
+import { useProductsContext } from '@/context/products/ProductsContextProvider';
+import { sortAction } from '@/context/actions/actionCreators';
 
 const MainLayout = () => {
+  const { dispatch } = useProductsContext();
   const [selectValue, setselectValue] = useState<string>('დალაგება');
   const [isFilterMenuHidden, setisFilterMenuHidden] = useState<boolean>(false);
+
+  const handleSelectClick = (value: string) => {
+    dispatch(sortAction(value));
+    setselectValue(value);
+  };
 
   return (
     <>
@@ -44,7 +52,7 @@ const MainLayout = () => {
               <StyledOptionSpan
                 key={select.value}
                 value={select.value}
-                onClick={() => setselectValue(select.value)}
+                onClick={() => handleSelectClick(select.value)}
               >
                 {select.text}
               </StyledOptionSpan>
